@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MYX Dashboard</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- bootstrap -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet"/>
+
+    <!-- theme -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/theme/default.css"/>
+
+    <!-- libraries -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/elements/tables.css"/>
+
+
+    <!-- open sans font -->
+    <link
+        href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel='stylesheet' type='text/css'/>
+
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<!-- navbar -->
+<?php echo $this->partial('layout/header'); ?>
+<!-- end navbar -->
+
+<!-- sidebar -->
+<?php echo $this->partial('layout/sidebar'); ?>
+
+<!-- end sidebar -->
+
+
+<!-- main container -->
+<div class="content">
+    <div id="pad-wrapper">
+        <?php if ($this->layout()->header): ?>
+            <div class="row">
+                <div class="col-md-9">
+                    <h2><?php echo $this->layout()->header ?></h2>
+                    <small><?php echo $this->layout()->desc_header ?></small>
+                </div>
+                <?php if ($this->layout()->action): ?>
+                    <?php echo $this->layout()->action;?>
+                <?php endif ?>
+            </div>
+        <?php endif ?>
+        <br>
+        <?php echo $this->layout()->content; ?>
+
+
+        <?php //echo $this->partial('layout/footer'); ?>
+    </div>
+    <!-- /pad-wrapper -->
+</div>
+<!-- content -->
+<!-- /main container -->
+
+
+<!-- scripts -->
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/bootstrap.js"></script>
+<script src="/assets/js/theme.js"></script>
+
+<script src="/assets/js/tables/jquery.peity.min.js"></script>
+<script src="/assets/js/tables/peity-demo.js"></script>
+
+<script src="/assets/js/tables/icheck.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
+
+</body>
+</html>

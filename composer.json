@@ -1,0 +1,14 @@
+{
+    "name": "icqparty/linebuild",
+    "description": "Open Source",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "linebuild","open source","testing","phpunit",
+        "deploy","production","build","developer"
+    ],
+    "homepage": "http://linebuild.ru",
+    "require": {
+        "php":">=5.3.3",
+        "zendframework/zendframework": "2.3.*"
+    }
+}
