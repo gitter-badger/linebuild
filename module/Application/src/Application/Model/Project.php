@@ -14,6 +14,6 @@ class Project extends AbstractEntity
     public $branch;
     public $open;
     public $status;
-
+    public $owner;
 
 }

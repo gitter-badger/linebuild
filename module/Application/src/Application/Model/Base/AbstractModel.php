@@ -3,8 +3,10 @@ namespace Application\Model\Base;
 
 
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\AbstractTableGateway;
+use Zend\Stdlib\Hydrator\ObjectProperty;
 
 class AbstractModel extends AbstractTableGateway
 {
@@ -13,8 +15,10 @@ class AbstractModel extends AbstractTableGateway
     {
         $this->adapter = $adapter;
         $this->table=$table;
-        $this->resultSetPrototype = new ResultSet();
-        $this->resultSetPrototype->setArrayObjectPrototype($object);
+        $resultSet = new HydratingResultSet();
+        $resultSet->setObjectPrototype($object);
+        $resultSet->setHydrator(new ObjectProperty());
+        $this->resultSetPrototype=$resultSet;
 
         $this->initialize();
     }
@@ -42,33 +46,28 @@ class AbstractModel extends AbstractTableGateway
         return $row;
     }
 
-    public function save($user)
+    public function save($object)
     {
-        $data = array(
-            'artist' => $user->artist,
-            'title'  => $user->title,
-        );
-
-        $id = (int) $user->id;
+        $id = (int) $object->id;
 
         if ($id == 0) {
-            $this->insert($data);
+            $this->insert($object->getArrayCopy());
         } elseif ($this->get($id)) {
             $this->update(
-                $data,
-                array(
-                    'id' => $id,
-                )
+                $object->getArrayCopy(),array('id' => $id)
             );
+
         } else {
             throw new \Exception('Form id does not exist');
         }
+        return $this->getLastInsertValue();
     }
 
-    public function delete($id)
+    public function delete($ids)
     {
+
         parent::delete(array(
-            'id' => $id,
+            'id' => $ids,
         ));
     }
 } 

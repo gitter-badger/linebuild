@@ -14,4 +14,6 @@ class User extends AbstractEntity
     public $login_date;
     public $status;
     public $update_date;
+
+
 }

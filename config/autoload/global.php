@@ -9,23 +9,11 @@ return array(
         ),
     ),
 
-    'transport' => array(
-        'host' => 'smtp.gmail.com',
-        'port' => 465 ,
-        'connection_class' => 'login',
-        'connection_config' => array(
-            'ssl'       => 'ssl',
-            'username' => 'icqparty@gmail.com',
-            'password' => 'askgopa999'
-        ),
-    ),
-
-
     'caches' => array(
         'cache-main' => array(
             'adapter' => array(
                 'name' => 'filesystem',
-                'namespace'=>'project',
+                'namespace'=>'linebuild',
                 'options' => array(
                     'ttl' => 2000,
                     'cache_dir' => './data/cache',

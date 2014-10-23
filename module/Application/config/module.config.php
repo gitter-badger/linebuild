@@ -32,28 +32,28 @@ return array(
                             ),
                         ),
                     ),
-                    'edit' => array(
+                    'setting' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/edit/:id',
+                            'route' => '/setting/:id',
                             'defaults' => array(
-                                'action'     => 'edit',
+                                'action'     => 'setting',
                             ),
                         ),
                     ),
-                    'build' => array(
+                    'key' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/build/:id',
+                            'route' => '/private/:id/key',
                             'defaults' => array(
-                                'action'     => 'build',
+                                'action'     => 'setting',
                             ),
                         ),
                     ),
                     'view' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/view/:id',
+                            'route' => '/view/:id[/:page]',
                             'defaults' => array(
                                 'action'     => 'view',
                             ),
@@ -84,7 +84,7 @@ return array(
                     'rebuild' => array(
                         'type' => 'Segment',
                         'options' => array(
-                            'route' => '/rebuild',
+                            'route' => '/rebuild/:id',
                             'defaults' => array(
                                 'action'     => 'rebuild',
                             ),
@@ -204,6 +204,27 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'sc-service' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/sc-service',
+                            'defaults' => array(
+                                'action'     => 'sc-service',
+                            ),
+                        ),
+                    ),
+                    'notification' => array(
+                        'type' => 'Segment',
+                        'options' => array(
+                            'route' => '/notification',
+                            'defaults' => array(
+                                'action'     => 'notification',
+                            ),
+                        ),
+                    ),
+                )
             )
         ),
     ),
@@ -243,7 +264,7 @@ return array(
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => array(
-            'onepage/layout'             => __DIR__ . '/../view/layout/login.phtml',
+            'onepage/layout'             => __DIR__ . '/../view/layout/onepage.phtml',
             'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
             'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
             'error/404'               => __DIR__ . '/../view/error/404.phtml',

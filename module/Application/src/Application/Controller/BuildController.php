@@ -6,28 +6,56 @@ use Zend\View\Model\ViewModel;
 
 class BuildController extends AbstractActionController
 {
-    public function indexAction()
-    {
-        return new ViewModel();
-    }
-
-    public function editAction()
-    {
-        return new ViewModel();
-    }
-
     public function rebuildAction()
     {
-        return new ViewModel();
+        $id = $this->params('id', false);
+
+        $buildModel = $this->getServiceLocator()->get('buildModel');
+        $old_build = $buildModel->get($id);
+
+        $old_build->id=null;
+        $old_build->status=0;
+        $old_build->log='';
+        $old_build->extra='';
+
+        $id=$buildModel->save($old_build);
+
+        $this->redirect()->toRoute('build/view',array('id'=>$id));
     }
 
-    public function deleteAction()
-    {
-        return new ViewModel();
-    }
 
     public function viewAction()
     {
-        return new ViewModel();
+        $this->layout()->desc_header = "Projects   icqparty/Clodo-API-PHP-class";
+
+
+        $view = new ViewModel();
+
+        $id = $this->params('id', false);
+        $buildModel = $this->getServiceLocator()->get('buildModel');
+        $build = $buildModel->get($id);
+
+        $this->layout()->action = array(
+            array(
+                'title' => 'Restart', 'id' => $id, 'route' => 'build/rebuild', 'icon' => 'fa fa-pencil-square-o'
+            ),
+            array(
+                'title' => 'Delete build', 'id' => $id, 'route' => 'project/delete', 'icon' => 'fa fa-remove'
+            )
+
+        );
+        $this->layout()->header = 'Build #'.$build->id;
+        $view->setVariable('build', $build);
+        return $view;
     }
+    public function deleteAction()
+    {
+        $id = $this->params('id', false);
+        $project_id = $this->params('project_id', false);
+
+        $buildModel = $this->getServiceLocator()->get('BuildModel');
+        $result = $buildModel->delete($id);
+        $this->redirect()->toRoute('project/view',array('project_id'=>$project_id));
+    }
+
 }

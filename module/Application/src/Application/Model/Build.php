@@ -15,5 +15,7 @@ class Build extends AbstractEntity
     public $extra;
     public $status;
     public $finish_date;
-    public $commiter;
+    public $author;
+    public $message;
+    public $duration;
 }

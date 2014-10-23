@@ -16,8 +16,10 @@
                 <?php echo $this->formText($this->form->get('username')); ?>
             </div>
             <?php echo $this->formElementErrors($this->form->get('username'), array('class' => 'error_message')); ?>
-
+            <br>
+            <p>
             <?php echo $this->formSubmit($this->form->get('submit')); ?>
+            </p>
 
             <p class="text-center">
                 <a href="<?php echo $this->url('user/login');?>">
